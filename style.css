@@ -18,3 +18,11 @@ main{
 .subPad{
     margin-bottom: 1em;
 }
+
+.estimate{
+    margin: 1em 4em 1em 1em;
+}
+
+input::placeholder {
+    font-weight: bold;
+}

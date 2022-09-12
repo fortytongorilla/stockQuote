@@ -3,7 +3,9 @@ const searchInput = document.querySelector('input');
 const accordBtns = document.querySelectorAll('.accordion-button');
 const accordText = document.querySelectorAll('.accordion-collapse');
 const accordContainer = document.querySelector('.accordion');
-const mainHeader = document.querySelector('.lblheader')
+const mainHeader = document.querySelector('.lblheader');
+const btnEstimates = document.querySelectorAll('.btn-estimate');
+
 
 const baseURL = 'https://ticker-ex-fortytongorilla.vercel.app/ticker/';
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -17,17 +19,36 @@ form.addEventListener('submit', formSubmitted);
 const clearSubmit = () => {
     document.getElementById('tickerEntered').value = "";
     searchInput.focus();
+};
+searchInput.focus();
+
+
+const blobber = () => {
+    console.log('blobbing');
 }
 
-clearSubmit();
+accordContainer.addEventListener("click", function(e) {
+    e.preventDefault();
+    const button = e.target;
+    if (!button.classList.contains("accordion-button")) return;
+    button.closest(".accordion-item")
+          .querySelector(".accordion-collapse")
+          .classList.toggle("collapse")
+});
 
+accordContainer.addEventListener("click", function(e) {
+    e.preventDefault();
+    const button = e.target;
+    if (!button.classList.contains("btn-estimate")) return;
+    button.closest(".estimate")
+        .blobber();
+});
 
 
 
 function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
-    // console.log(stockTicker);
     accordContainer.textContent = "";
     getStockResults(stockTicker);
 };
@@ -41,7 +62,7 @@ const displayTickerResults = function(arr) {
         ${arr.ticker.toUpperCase()}
       </button>
     </h2>
-    <div  class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+    <div  class="accordion-collapse collapse" aria-labelledby="headingOne">
       <div class="accordion-body">
             Stock price - ${arr.ticker.toUpperCase()} - ${todaysDate} <br><br>
 
@@ -65,6 +86,15 @@ const displayTickerResults = function(arr) {
             Earnings growth ${currentYear-1}: &ensp; ${arr.earnGrowth_PastYear}<br>
             Earnings growth next 5 years: &ensp; ${arr.earnGrowth_Next_5yrs}<br>
             Revenue growth ${currentYear}: &ensp; ${arr.revenueGrowth_PastYear}<br><br>
+         </div>
+         <div class="estimate">
+         <form>
+         <fieldset class="form-group">
+             <label class="lblEstimate text-primary" for="search">Enter Projected Earnings</label>
+             <input type="text" class="form-control inputPad" id="estimate" placeholder="Projected Earnings">
+         </fieldset>
+             <button type="submit" id="3" class="btn btn-primary btn-estimate subPad">Calculte Future Price</button>
+     </form>
          </div>
     </div>
   </div>`;
@@ -97,17 +127,4 @@ const displayTickerResults = function(arr) {
     } finally {
         clearSubmit();
     }
-}
-
-
-
-accordContainer.addEventListener("click", function(e) {
-    // Test where the click orinated
-    const button = e.target;
-    // Was it one of the buttons?
-    if (!button.classList.contains("accordion-button")) return; // something else
-    // Find the button's ancestor that contains the collapsible content.
-    button.closest(".accordion-item")
-          .querySelector(".accordion-collapse") // select that collapsible element
-          .classList.toggle("collapse") // ...and toggle
-});
+};
