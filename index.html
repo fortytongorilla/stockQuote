@@ -7,21 +7,22 @@
     <link rel="stylesheet" href="https://bootswatch.com/5/solar/bootstrap.min.css">
     <title>Cazzimoto's Stock Picker</title>
     <script src="index.js" type="module" charset="utf-8"></script>
-    <style>
-        main{
-            margin-top: 2em
-        }
-    </style>
+    <link defer rel="stylesheet" href="style.css">
 </head>
 <body>
     <main class="container">
         <form>
             <fieldset class="form-group">
                 <label class="lblheader" for="search"></label>
-                <input type="text" class="form-control" id="tickerEntered" placeholder="Enter Stock">
+                <input type="text" class="form-control inputPad" id="tickerEntered" placeholder="Enter Stock">
             </fieldset>
-                <button type="submit" class="btn btn-tickerSubmit btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary btn-tickerSubmit subPad">Submit</button>
         </form>
+
+        <div class="alert alert-dismissible alert-primary hidden">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Oh snap!</strong> <a href="#" class="alert-link">
+          </div>
 
         <div class="accordion" id="accordionExample">
             <!-- <div class="accordion-item">

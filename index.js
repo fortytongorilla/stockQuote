@@ -11,7 +11,7 @@ const today  = new Date();
 const todaysDate = today.toLocaleDateString("en-US", options)
 const currentYear = today.getFullYear()
 
-mainHeader.textContent = `Search Stock Results for ${todaysDate}`
+mainHeader.textContent = `Cazzimoto's stock app - ${todaysDate}`
 form.addEventListener('submit', formSubmitted);
 
 const clearSubmit = () => {
@@ -65,10 +65,6 @@ const displayTickerResults = function(arr) {
             Earnings growth ${currentYear-1}: &ensp; ${arr.earnGrowth_PastYear}<br>
             Earnings growth next 5 years: &ensp; ${arr.earnGrowth_Next_5yrs}<br>
             Revenue growth ${currentYear}: &ensp; ${arr.revenueGrowth_PastYear}<br><br>
-
-
-
-
          </div>
     </div>
   </div>`;
