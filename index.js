@@ -123,11 +123,11 @@ const displayTickerResults = function(arr) {
 };
 
 btnCalc.addEventListener("click", function(e) {
-    e.preventDefault();
-    const button = e.target;
-    if (!button.classList.contains("btn-estimate")) return;
-    button.closest(".estimate")
-        .blobber();
+    // e.preventDefault();
+    // const button = e.target;
+    // if (!button.classList.contains("btn-estimate")) return;
+    // button.closest(".estimate")
+    //     .blobber();
         console.log("this blows chunks");
 });
 
