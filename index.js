@@ -36,15 +36,6 @@ accordContainer.addEventListener("click", function(e) {
           .classList.toggle("collapse")
 });
 
-accordContainer.addEventListener("click", function(e) {
-    e.preventDefault();
-    const button = e.target;
-    if (!button.classList.contains("btn-estimate")) return;
-    button.closest(".estimate")
-        .blobber();
-});
-
-
 
 function formSubmitted(e) {
     e.preventDefault();
@@ -128,3 +119,12 @@ const displayTickerResults = function(arr) {
         clearSubmit();
     }
 };
+
+accordContainer.addEventListener("click", function(e) {
+    e.preventDefault();
+    const button = e.target;
+    if (!button.classList.contains("btn-estimate")) return;
+    button.closest(".estimate")
+        .blobber();
+});
+
