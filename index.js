@@ -5,7 +5,7 @@ const accordText = document.querySelectorAll('.accordion-collapse');
 const accordContainer = document.querySelector('.accordion');
 const mainHeader = document.querySelector('.lblheader');
 const btnEstimates = document.querySelectorAll('.btn-estimate');
-const btnCalc = document.querySelector('.subPad')
+const btnCalc = document.querySelector('.btnCalc')
 
 
 
@@ -39,6 +39,33 @@ accordContainer.addEventListener("click", function(e) {
 });
 
 
+accordContainer.addEventListener("click", function(e) {
+    e.preventDefault();
+    const button = e.target;
+    if (!button.classList.contains("btn-estimate")) return;
+    const btnNum = button.classList[3];  // Zero Index to select proper #ID
+    const boots = document.getElementById(`estimate${btnNum}`).value
+    const input = Array.from(document.querySelectorAll(`.accordion-body${btnNum}`))[0].innerHTML;
+    // console.log(typeof input);
+    const blob = input.trim().split(':')
+    for (const item of blob) {
+        console.log(item.slice(0, item.indexOf('<br>')).trim());
+    }
+
+
+    // console.log(blob);
+
+
+
+
+    // console.log(boots);
+    // console.log(btnNum);
+
+});
+
+
+
+
 function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
@@ -47,8 +74,8 @@ function formSubmitted(e) {
 };
 
 
-const displayTickerResults = function(arr) {
-        // console.log(arr.previous_Close);
+const displayTickerResults = function(arr, i) {
+        // console.log(`this is ${i}`);
     const tickerHTML = `<div class="accordion-item">
     <h2 class="accordion-header">
       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -56,7 +83,7 @@ const displayTickerResults = function(arr) {
       </button>
     </h2>
     <div  class="accordion-collapse collapse" aria-labelledby="headingOne">
-      <div class="accordion-body">
+      <div class="accordion-body${i}">
             Stock price - ${arr.ticker.toUpperCase()} - ${todaysDate} <br><br>
 
             Previous close:  &ensp; ${arr.previous_Close}<br>
@@ -84,9 +111,9 @@ const displayTickerResults = function(arr) {
          <form>
          <fieldset class="form-group">
              <label class="lblEstimate text-primary" for="search">Enter Projected Earnings</label>
-             <input type="text" class="form-control inputPad" id="estimate" placeholder="Projected Earnings">
+             <input type="text" class="form-control inputPad" id="estimate${i}" placeholder="Projected Earnings">
          </fieldset>
-             <button type="submit" id="3" class="btn btn-primary btn-estimate subPad">Calculte Future Price</button>
+             <button type="submit" id="3" class="btn btn-primary btn-estimate ${i}">Calculte Future Price</button>
      </form>
          </div>
     </div>
@@ -110,9 +137,9 @@ const displayTickerResults = function(arr) {
         const tickRes = await fetch(`${baseURL}${stock}`);
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
-        tickerData.forEach(val => {
+        tickerData.forEach((val, i) => {
             if (!val.previous_Close) return;
-            displayTickerResults(val);
+            displayTickerResults(val, i);
         });
     } catch (error) {
         console.warn(error);
@@ -122,12 +149,5 @@ const displayTickerResults = function(arr) {
     }
 };
 
-btnCalc.addEventListener("click", function(e) {
-    // e.preventDefault();
-    // const button = e.target;
-    // if (!button.classList.contains("btn-estimate")) return;
-    // button.closest(".estimate")
-    //     .blobber();
-        console.log("this blows chunks");
-});
+
 
