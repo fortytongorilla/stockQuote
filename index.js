@@ -5,6 +5,8 @@ const accordText = document.querySelectorAll('.accordion-collapse');
 const accordContainer = document.querySelector('.accordion');
 const mainHeader = document.querySelector('.lblheader');
 const btnEstimates = document.querySelectorAll('.btn-estimate');
+const btnCalc = document.querySelector('.subPad')
+
 
 
 const baseURL = 'https://ticker-ex-fortytongorilla.vercel.app/ticker/';
@@ -120,11 +122,12 @@ const displayTickerResults = function(arr) {
     }
 };
 
-accordContainer.addEventListener("click", function(e) {
+btnCalc.addEventListener("click", function(e) {
     e.preventDefault();
     const button = e.target;
     if (!button.classList.contains("btn-estimate")) return;
     button.closest(".estimate")
         .blobber();
+        console.log("this blows chunks");
 });
 
