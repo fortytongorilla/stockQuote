@@ -140,11 +140,9 @@ const displayTickerResults = function(arr, i) {
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
         tickerData.forEach((val, i) => {
-            databox.push(val);
             if (!val.previous_Close) return;
-               // displayTickerResults(val, i);
+            displayTickerResults(val, i);
         });
-        console.log(databox);
     } catch (error) {
         console.warn('testbot getDaily:', error);
         // alert(error);
