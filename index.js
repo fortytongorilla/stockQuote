@@ -70,7 +70,6 @@ accordContainer.addEventListener("click", function(e) {
 function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
-    console.log('got here boi', stockTicker);
     accordContainer.textContent = "";
     getDaily(stockTicker);
 };
@@ -136,13 +135,16 @@ const displayTickerResults = function(arr, i) {
 
  async function getDaily(stock) {
     try {
+        const databox = [];
         const tickRes = await fetch(`${baseURL}${stock}`);
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
         tickerData.forEach((val, i) => {
+            databox.push(val);
             if (!val.previous_Close) return;
-            console.log(val);   // displayTickerResults(val, i);
+               // displayTickerResults(val, i);
         });
+        console.log(databox);
     } catch (error) {
         console.warn('testbot getDaily:', error);
         // alert(error);
