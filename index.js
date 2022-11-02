@@ -70,6 +70,7 @@ accordContainer.addEventListener("click", function(e) {
 function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
+    console.log('got here boi', stockTicker);
     accordContainer.textContent = "";
     getDaily(stockTicker);
 };
@@ -143,8 +144,8 @@ const displayTickerResults = function(arr, i) {
             console.log(val);   // displayTickerResults(val, i);
         });
     } catch (error) {
-        console.warn(error);
-        alert(error);
+        console.warn('testbot getDaily:', error);
+        // alert(error);
     } finally {
         clearSubmit();
     }
@@ -160,7 +161,7 @@ async function getEarnings(stock) {
             console.log(val); //displayTickerResults(val, i);
         });
     } catch (error) {
-        console.warn(error);
+        console.warn('testbot getEarnings', error);
         alert(error);
     } finally {
         clearSubmit();
