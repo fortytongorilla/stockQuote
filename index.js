@@ -9,7 +9,8 @@ const btnCalc = document.querySelector('.btnCalc')
 
 
 
-const baseURL = 'https://ticker-ex-fortytongorilla.vercel.app/ticker/';
+const baseURL = 'https://fortytonstocks.vercel.app/earnings/';
+const base2URL = 'https://fortytonstocks.vercel.app/search/';
 const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 const today  = new Date();
 const todaysDate = today.toLocaleDateString("en-US", options)
@@ -70,7 +71,7 @@ function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
     accordContainer.textContent = "";
-    getStockResults(stockTicker);
+    getDaily(stockTicker);
 };
 
 
@@ -132,14 +133,14 @@ const displayTickerResults = function(arr, i) {
 // };
 
 
- async function getStockResults(stock) {
+ async function getDaily(stock) {
     try {
         const tickRes = await fetch(`${baseURL}${stock}`);
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
         tickerData.forEach((val, i) => {
             if (!val.previous_Close) return;
-            displayTickerResults(val, i);
+            console.log(val);   // displayTickerResults(val, i);
         });
     } catch (error) {
         console.warn(error);
@@ -149,5 +150,19 @@ const displayTickerResults = function(arr, i) {
     }
 };
 
-
-
+async function getEarnings(stock) {
+    try {
+        const tickRes = await fetch(`${base2URL}${stock}`);
+        if (!tickRes.ok) throw new Error('Bad Data Returned')
+        const tickerData = await tickRes.json();
+        tickerData.forEach((val, i) => {
+            if (!val.previous_Close) return;
+            console.log(val); //displayTickerResults(val, i);
+        });
+    } catch (error) {
+        console.warn(error);
+        alert(error);
+    } finally {
+        clearSubmit();
+    }
+};
