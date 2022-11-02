@@ -52,16 +52,6 @@ accordContainer.addEventListener("click", function(e) {
     for (const item of blob) {
         console.log(item.slice(0, item.indexOf('<br>')).trim());
     }
-
-
-    // console.log(blob);
-
-
-
-
-    // console.log(boots);
-    // console.log(btnNum);
-
 });
 
 
@@ -71,7 +61,7 @@ function formSubmitted(e) {
     e.preventDefault();
     const stockTicker = searchInput.value;
     accordContainer.textContent = "";
-    getDaily(stockTicker);
+    getEarnings(stockTicker);
 };
 
 
@@ -140,11 +130,9 @@ const displayTickerResults = function(arr, i) {
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
         const {headers, lables, price} = tickerData
-        console.log(headers, lables, price);
+        // console.log(headers, lables, price);
         price.forEach((val, i) => {
-            // if (!val.previous_Close) return;
             displayTickerResults(val, i);
-            databox.push(val);
         });
         console.log(databox);
     } catch (error) {
@@ -160,10 +148,11 @@ async function getEarnings(stock) {
         const tickRes = await fetch(`${base2URL}${stock}`);
         if (!tickRes.ok) throw new Error('Bad Data Returned')
         const tickerData = await tickRes.json();
-        tickerData.forEach((val, i) => {
-            if (!val.previous_Close) return;
-            console.log(val); //displayTickerResults(val, i);
-        });
+        console.log(tickerData);
+        // tickerData.forEach((val, i) => {
+        //     if (!val.previous_Close) return;
+        //     console.log(val); //displayTickerResults(val, i);
+        // });
     } catch (error) {
         console.warn('testbot getEarnings', error);
         alert(error);
