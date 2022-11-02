@@ -135,14 +135,11 @@ const displayTickerResults = function(arr, i) {
 
  async function getDaily(stock) {
     try {
-        const headers = {};
-        const price = {};
-        const lables = {};
         const tickRes = await fetch(`${baseURL}${stock}`);
         if (!tickRes.ok) throw new Error('Please enter stock')
         const tickerData = await tickRes.json();
-        const testbob = tickerData.json()
-        console.log(testbob);
+        const {headers, lables, price} = tickerData
+        console.log(headers, lables, price);
         // tickerData.forEach((val, i) => {
         //     // if (!val.previous_Close) return;
         //     databox.push(val);
