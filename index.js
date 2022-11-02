@@ -141,7 +141,7 @@ const displayTickerResults = function(arr, i) {
         const tickerData = await tickRes.json();
 
         tickerData.forEach((val, i) => {
-            if (!val.previous_Close) return;
+            // if (!val.previous_Close) return;
             databox.push(val);
         });
         console.log(databox);
