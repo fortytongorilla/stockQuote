@@ -140,11 +140,11 @@ const displayTickerResults = function(arr, i) {
         const tickerData = await tickRes.json();
         const {headers, lables, price} = tickerData
         console.log(headers, lables, price);
-        // tickerData.forEach((val, i) => {
-        //     // if (!val.previous_Close) return;
-        //     databox.push(val);
-        // });
-        // console.log(databox);
+        price.forEach((val, i) => {
+            // if (!val.previous_Close) return;
+            databox.push(val);
+        });
+        console.log(databox);
     } catch (error) {
         console.warn('testbot getDaily:', error);
         // alert(error);
